@@ -2,6 +2,10 @@
 
 A team of four agents turns an RFP into a **draft solution proposal**: a requirements traceability matrix, a solution outline, an effort estimate, a risk register and a Markdown export. It's built the way a presales architect actually responds to a bid.
 
+[![Demo: real CLI run](docs/demo/demo.jpg)](docs/demo/demo.mp4)
+
+*Demo recorded from the real CLI output ([MP4](docs/demo/demo.mp4)). More projects: [thenavasoft.com/projects](https://thenavasoft.com/projects.html)*
+
 ## Problem
 Responding to an RFP takes days of reading, mapping requirements to capabilities, sizing and risk analysis, and the traceability is usually kept by hand in spreadsheets. This copilot does the first 80% in seconds, keeps every number explainable, and flags what still needs a human.
 
