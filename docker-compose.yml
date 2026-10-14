@@ -1,0 +1,5 @@
+services:
+  copilot:
+    build: .
+    environment: { LLM_PROVIDER: "${LLM_PROVIDER:-mock}" }
+    volumes: ["./out:/app/out"]
