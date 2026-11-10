@@ -43,11 +43,18 @@ requirements=12 covered=12 total_days=296.2 risks=12 open_items=0 -> out/sample-
 
 The full generated proposal is in [out/sample-proposal.md](out/sample-proposal.md).
 
-## Quickstart
+## Run it in 60 seconds
 ```bash
-python3.11 -m venv .venv && . .venv/bin/activate
-make install && make test && make demo
-LLM_PROVIDER=ollama LLM_MODEL=llama3.2:3b copilot path/to/rfp.md   # real LLM extraction
+python3 -m venv .venv && . .venv/bin/activate
+pip install -e ".[dev]"
+copilot samples/rfp-retail-analytics.md -o out/sample-proposal.md
+```
+On the default mock LLM this prints `requirements=12 covered=12 total_days=296.2 risks=12 open_items=0` and writes the draft proposal. No API key is required.
+
+A real model is optional, and useful for free-form RFPs that are not already numbered:
+```bash
+make test
+LLM_PROVIDER=ollama LLM_MODEL=llama3.2:3b copilot path/to/rfp.md
 LLM_PROVIDER=anthropic ANTHROPIC_API_KEY=... copilot path/to/rfp.md
 ```
 Docker: `docker compose run copilot`

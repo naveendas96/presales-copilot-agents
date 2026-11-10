@@ -46,3 +46,20 @@ def test_llm_is_pluggable():
     llm = MockLLM(lambda p, s: '[{"id":"R01","text":"Build dashboards","priority":"Must"}]' if p.startswith("EXTRACT") else "custom summary")
     s = build(llm).invoke({"rfp": "x"})
     assert "custom summary" in s["proposal"] and len(llm.calls) == 2
+
+
+def test_cost_matches_total_days_and_rate():
+    from copilot.graph import RATE_PER_DAY_USD
+    e = run()["estimate"]
+    assert e["cost_usd"] == round(e["total_days"] * RATE_PER_DAY_USD)
+    assert e["pm_days"] == round(e["base_days"] * 0.12, 1)
+
+
+def test_cli_writes_proposal(tmp_path, monkeypatch):
+    import sys
+    from copilot.cli import main
+    out = tmp_path / "p.md"
+    rfp = Path(__file__).parents[1] / "samples" / "rfp-retail-analytics.md"
+    monkeypatch.setattr(sys, "argv", ["copilot", str(rfp), "-o", str(out)])
+    main()
+    assert out.read_text().startswith("# Solution Proposal (draft)")
